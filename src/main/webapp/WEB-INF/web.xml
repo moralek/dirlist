@@ -1,0 +1,79 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>DirList</display-name>
+
+    <servlet>
+        <servlet-name>dl</servlet-name>
+        <servlet-class>com.dlt.dl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dl</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>fd</servlet-name>
+        <servlet-class>com.dlt.fd</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>fd</servlet-name>
+        <url-pattern>/fd</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>fz</servlet-name>
+        <servlet-class>com.dlt.fz</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>fz</servlet-name>
+        <url-pattern>/fz</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+		<servlet-name>hrso</servlet-name>
+		<servlet-class>com.dlt.hrso</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>hrso</servlet-name>
+		<url-pattern>/hrso</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>del</servlet-name>
+		<servlet-class>com.dlt.del</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>del</servlet-name>
+		<url-pattern>/del</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>si</servlet-name>
+		<servlet-class>com.dlt.si</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>si</servlet-name>
+		<url-pattern>/si</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>up</servlet-name>
+		<servlet-class>com.dlt.up</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>up</servlet-name>
+		<url-pattern>/up</url-pattern>
+	</servlet-mapping>
+
+
+    <welcome-file-list>
+        <welcome-file>list</welcome-file>
+    </welcome-file-list>
+
+</web-app>
