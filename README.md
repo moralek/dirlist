@@ -12,6 +12,7 @@ Aplicación web Java (Servlets) empaquetada con Maven como WAR para listar y ope
 - `src/main/java/com/dlt/`: servlets y utilidades.
 - `src/main/webapp/WEB-INF/web.xml`: mapeo de rutas.
 - `build.bat`: script de build para Windows.
+- `build.sh`: script de build para Linux/Unix.
 
 ## Endpoints
 - `/list` → `dl`: listado de directorios y archivos.
@@ -31,6 +32,17 @@ Aplicación web Java (Servlets) empaquetada con Maven como WAR para listar y ope
 ## Build
 ```bash
 mvn clean package
+```
+
+En Windows:
+```bat
+build.bat
+```
+
+En Linux/Unix:
+```bash
+chmod +x build.sh
+./build.sh
 ```
 
 ## Observaciones
