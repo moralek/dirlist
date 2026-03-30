@@ -31,6 +31,10 @@ public class si extends HttpServlet {
         if (os.contains("win")) {
             String raw = executeCommand("cmd /c wmic os get LocalDateTime /value");
             osTime = parseWMICDate(raw);
+            String rawZone = executeCommand("cmd /c tzutil /g");
+            if (rawZone != null && !rawZone.trim().isEmpty()) {
+                osTZ = rawZone.trim();
+            }
         } else {
             // Linux y WSL2
             String raw = executeCommand("date");
@@ -42,21 +46,26 @@ public class si extends HttpServlet {
                     String tz = parts[4];
                     String year = parts[5];
                     osTime = String.format("%s-%s-%s %s %s", year, getMonthNumber(parts[1]), day, time, tz);
-                    osTZ = ZoneId.systemDefault().toString();
                 }
+            }
+            String rawZone = executeCommand(new String[]{"date", "+%Z %z"});
+            if (rawZone != null && !rawZone.trim().isEmpty()) {
+                osTZ = rawZone.trim();
             }
         }
 
         response.setContentType("text/plain;charset=UTF-8");
-        response.getWriter().println("Java Time: " + javaTime);
-        response.getWriter().println("Java Zone: " + javaZoneId);
+        String javaTimeDisplay = javaTime + " (" + javaZoneId + ")";
+        String osTimeDisplay = osTime;
+        if (!osTZ.isEmpty()) {
+            osTimeDisplay += " (" + osTZ + ")";
+        }
+
+        response.getWriter().println("Java Time: " + javaTimeDisplay);
         response.getWriter().println("Java: " + javaVersion);
         response.getWriter().println("App Server: " + serverInfo);
         response.getWriter().println("OS: " + osName + " (" + osArch + ")");
-        response.getWriter().println("OS Time: " + osTime);
-        if (!osTZ.isEmpty()) {
-            response.getWriter().println("OS TZ: " + osTZ);
-        }
+        response.getWriter().println("OS Time: " + osTimeDisplay);
     }
 
     private String getMonthNumber(String monthAbbreviation) {
@@ -98,6 +107,21 @@ public class si extends HttpServlet {
     }
 
     private String executeCommand(String command) {
+        try {
+            Process process = Runtime.getRuntime().exec(command);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder result = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                result.append(line).append("\n");
+            }
+            return result.toString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private String executeCommand(String[] command) {
         try {
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
