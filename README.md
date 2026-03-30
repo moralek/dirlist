@@ -53,19 +53,19 @@ chmod +x build.sh
 ## Ejemplos de uso (rápidos)
 
 ### 1) Navegar carpetas desde el navegador
-1. Abre la aplicación en tu servidor, por ejemplo: `http://localhost:8080/cgu90dlt/list`.
+1. Abre la aplicación en tu servidor, por ejemplo: `http://localhost:8080/cgu90dlst/list`.
 2. Haz clic en las carpetas para entrar.
 3. Usa la barra **Buscar...** para filtrar por prefijo de nombre.
 
 ### 2) Descargar un archivo
 - Desde la tabla, haz clic en el nombre del archivo.
 - O directo por URL:
-  `http://localhost:8080/cgu90dlt/fd?file=/ruta/completa/archivo.txt`
+  `http://localhost:8080/cgu90dlst/fd?file=/ruta/completa/archivo.txt`
 
 ### 3) Comprimir y bajar una carpeta
 - Haz clic en el ícono de archivo comprimido (ZIP) en la fila.
 - O por URL:
-  `http://localhost:8080/cgu90dlt/fz?path=/ruta/completa/carpeta`
+  `http://localhost:8080/cgu90dlst/fz?path=/ruta/completa/carpeta`
 
 ### 4) Subir un archivo a la carpeta actual
 1. Ve a la carpeta destino en `/list`.

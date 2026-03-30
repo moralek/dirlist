@@ -20,7 +20,7 @@
     </dependencies>
 
     <build>
-        <finalName>cgu90dlt</finalName>
+        <finalName>cgu90dlst</finalName>
 
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
