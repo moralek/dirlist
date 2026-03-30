@@ -61,11 +61,11 @@ public class si extends HttpServlet {
             osTimeDisplay += " (" + osTZ + ")";
         }
 
-        response.getWriter().println("Java Time: " + javaTimeDisplay);
+        response.getWriter().println("OS: " + osName + " (" + osArch + ")");
         response.getWriter().println("Java: " + javaVersion);
         response.getWriter().println("App Server: " + serverInfo);
-        response.getWriter().println("OS: " + osName + " (" + osArch + ")");
         response.getWriter().println("OS Time: " + osTimeDisplay);
+        response.getWriter().println("Java Time: " + javaTimeDisplay);
     }
 
     private String getMonthNumber(String monthAbbreviation) {
