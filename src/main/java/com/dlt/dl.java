@@ -96,7 +96,7 @@ public class dl extends HttpServlet {
 						out.println("<td>" + modifiedDate + "</td>");
 						out.println("<td>" + size + "</td>");
 						out.println("<td>");
-						out.println("<a href='fz?path=" + file.getAbsolutePath() + "'><i class='fas fa-file-archive'></i></a>");
+						out.println("<a href='fz?path=" + file.getAbsolutePath() + "' title='descargar en zip'><i class='fas fa-file-archive'></i></a>");
 						if (file.isFile()) {
 							out.println(" <span class='del-icon' style='display:none'><a href='#' onclick='confirmDelete(\"" + file.getAbsolutePath().replace("\\", "\\\\") + "\"); return false;'><i class='fas fa-times' style='margin-left:10px;color:#FF6666;'></i></a></span>");
 						}

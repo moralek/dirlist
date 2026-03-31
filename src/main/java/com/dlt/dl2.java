@@ -36,7 +36,9 @@ public class dl2 {
 		out.println("    fetch('si')");
 		out.println("      .then(response => response.text())");
 		out.println("      .then(data => {");
-		out.println("        infoDiv.innerHTML = '<pre>' + data + '</pre><a href=\"#\" id=\"toggleDeleteLink\" onclick=\"toggleDeleteIcons(); return false;\">mostrar eliminar</a>';");    
+		out.println("        const hasDeleteIcons = document.querySelectorAll('.del-icon').length > 0;");
+		out.println("        const deleteLink = hasDeleteIcons ? '<a href=\"#\" id=\"toggleDeleteLink\" onclick=\"toggleDeleteIcons(); return false;\">mostrar eliminar</a>' : '';");
+		out.println("        infoDiv.innerHTML = '<pre>' + data + '</pre>' + deleteLink;");
 		out.println("        infoDiv.style.display = 'block';");
 		out.println("      });");
 		out.println("  } else {");
@@ -62,6 +64,7 @@ public class dl2 {
 		out.println("function toggleDeleteIcons() {");
 		out.println("  const icons = document.querySelectorAll('.del-icon');");
 		out.println("  const toggleLink = document.getElementById('toggleDeleteLink');");
+		out.println("  if (!icons.length || !toggleLink) return;");
 		out.println("  const visible = icons.length && icons[0].style.display !== 'none';");
 		out.println("  icons.forEach(el => el.style.display = visible ? 'none' : 'inline');");
 		out.println("  toggleLink.innerText = visible ? 'mostrar eliminar' : 'ocultar eliminar';");
@@ -82,6 +85,7 @@ public class dl2 {
 		out.println("<div class='server-info'>");
 		out.println("User: " + currentUser + "<br>");
 		out.println("home: <a href='?path=" + userHome + "'>" + userHome.replace("\\", "/") + "/</a><br>");
+		out.println("<a href='login?logout=1'>Logout</a><br>");
 		out.println("<a href='#' onclick='toggleOSInfo(); return false;'>OS Info</a>");
 		out.println("<div id='osInfo' style='display:none; margin-top:5px; font-size:13px; color:#CCCCCC; font-family: Inter, sans-serif;'></div>");
 		out.println("</div>");
