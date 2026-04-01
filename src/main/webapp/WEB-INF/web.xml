@@ -6,17 +6,17 @@
     <display-name>DirList</display-name>
 
     <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>com.dlt.AuthFilter</filter-class>
+        <filter-name>af</filter-name>
+        <filter-class>com.dlt.af</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
+        <filter-name>af</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <servlet>
         <servlet-name>login</servlet-name>
-        <servlet-class>com.dlt.login</servlet-class>
+        <servlet-class>com.dlt.lg</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>

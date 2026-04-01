@@ -1,4 +1,4 @@
-rmdir /s /q target
+@echo off
+if exist target rmdir /s /q target
 pause
 mvn clean package
-pause

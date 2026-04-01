@@ -7,6 +7,11 @@ Aplicación web Java (Servlets) empaquetada con Maven como WAR para listar y ope
 - Empaquetado `war`
 - Servlet API 3.1 (`javax.servlet-api` con scope `provided`)
 
+## Compatibilidad Java
+- El proyecto está fijado a Java 8.
+- En [pom.xml](/workspace/dirlist/pom.xml) el compilador Maven usa `source` `1.8` y `target` `1.8`.
+- No debe asumirse compatibilidad ni migración automática a Java 11, 17 o superior sin cambios explícitos en build, pruebas y despliegue.
+
 ## Estructura
 - `pom.xml`: configuración de compilación y empaquetado.
 - `src/main/java/com/dlt/`: servlets y utilidades.
@@ -15,6 +20,7 @@ Aplicación web Java (Servlets) empaquetada con Maven como WAR para listar y ope
 - `build.sh`: script de build para Linux/Unix.
 
 ## Endpoints
+- `/login` → `lg`: acceso al sistema.
 - `/list` → `dl`: listado de directorios y archivos.
 - `/fd` → `fd`: descarga de archivos.
 - `/fz` → `fz`: compresión ZIP y descarga.
@@ -24,15 +30,29 @@ Aplicación web Java (Servlets) empaquetada con Maven como WAR para listar y ope
 - `/hrso` → `hrso`: hora/zona horaria del SO.
 
 ## Flujo principal
-1. El usuario entra a `/list`.
-2. Se muestra el contenido del `path` actual con filtro y ordenamiento.
-3. Por cada archivo/carpeta se habilitan acciones de descargar/zip/eliminar.
-4. Si hay permisos de escritura, se permite subir archivo.
+1. El usuario entra a `/list` o `/login`.
+2. Si no hay sesión autenticada, el filtro `af` redirige a `/login`.
+3. El usuario inicia sesión.
+4. Se muestra el contenido del `path` actual con filtro y ordenamiento.
+5. Por cada archivo/carpeta se habilitan acciones de descargar/zip/eliminar.
+6. Si hay permisos de escritura, se permite subir archivo.
+
+## Autenticación
+- El acceso al sistema requiere inicio de sesión previo en `/login`.
+
+## Clases principales
+- `lg`: servlet de acceso.
+- `af`: filtro de autenticación.
+- `ut`: utilidades generales.
+- `dl`: listado principal.
 
 ## Build
 ```bash
 mvn clean package
 ```
+
+Requisito:
+- Ejecutar el build con un entorno que tenga Java 8 y Maven disponibles.
 
 En Windows:
 ```bat
@@ -54,8 +74,10 @@ chmod +x build.sh
 
 ### 1) Navegar carpetas desde el navegador
 1. Abre la aplicación en tu servidor, por ejemplo: `http://localhost:8080/cgu90dlst/list`.
-2. Haz clic en las carpetas para entrar.
-3. Usa la barra **Buscar...** para filtrar por prefijo de nombre.
+2. Si no tienes sesión, serás redirigido a `http://localhost:8080/cgu90dlst/login`.
+3. Inicia sesión con las credenciales configuradas para el entorno.
+4. Haz clic en las carpetas para entrar.
+5. Usa la barra **Buscar...** para filtrar por prefijo de nombre.
 
 ### 2) Descargar un archivo
 - Desde la tabla, haz clic en el nombre del archivo.

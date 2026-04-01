@@ -36,9 +36,9 @@ public class dl2 {
 		out.println("    fetch('si')");
 		out.println("      .then(response => response.text())");
 		out.println("      .then(data => {");
-		out.println("        const hasDeleteIcons = document.querySelectorAll('.del-icon').length > 0;");
-		out.println("        const deleteLink = hasDeleteIcons ? '<a href=\"#\" id=\"toggleDeleteLink\" onclick=\"toggleDeleteIcons(); return false;\">mostrar eliminar</a>' : '';");
-		out.println("        infoDiv.innerHTML = '<pre>' + data + '</pre>' + deleteLink;");
+		out.println("        const hasActions = document.querySelectorAll('.del-icon').length > 0 || document.querySelectorAll('.action-upload').length > 0;");
+		out.println("        const actionsLink = hasActions ? '<a href=\"#\" id=\"toggleActionsLink\" onclick=\"toggleActions(); return false;\">mostrar acciones</a>' : '';");
+		out.println("        infoDiv.innerHTML = '<pre>' + data + '</pre>' + actionsLink;");
 		out.println("        infoDiv.style.display = 'block';");
 		out.println("      });");
 		out.println("  } else {");
@@ -61,13 +61,17 @@ public class dl2 {
 		out.println("  }");
 		out.println("}");
 
-		out.println("function toggleDeleteIcons() {");
+		out.println("function toggleActions() {");
 		out.println("  const icons = document.querySelectorAll('.del-icon');");
-		out.println("  const toggleLink = document.getElementById('toggleDeleteLink');");
-		out.println("  if (!icons.length || !toggleLink) return;");
-		out.println("  const visible = icons.length && icons[0].style.display !== 'none';");
+		out.println("  const uploads = document.querySelectorAll('.action-upload');");
+		out.println("  const toggleLink = document.getElementById('toggleActionsLink');");
+		out.println("  if ((!icons.length && !uploads.length) || !toggleLink) return;");
+		out.println("  const iconsVisible = icons.length && icons[0].style.display !== 'none';");
+		out.println("  const uploadsVisible = uploads.length && uploads[0].style.display !== 'none';");
+		out.println("  const visible = iconsVisible || uploadsVisible;");
 		out.println("  icons.forEach(el => el.style.display = visible ? 'none' : 'inline');");
-		out.println("  toggleLink.innerText = visible ? 'mostrar eliminar' : 'ocultar eliminar';");
+		out.println("  uploads.forEach(el => el.style.display = visible ? 'none' : 'inline-block');");
+		out.println("  toggleLink.innerText = visible ? 'mostrar acciones' : 'ocultar acciones';");
 		out.println("}");
 
 		out.println("function clearFilter() {");
@@ -130,12 +134,12 @@ public class dl2 {
     public static void printTableHeader(PrintWriter out, String sort, String order, String path, String filter) {
         out.println("<table>");
         out.println("<tr>");
-        out.println(utils.getSortableHeader("Name", "name", sort, order, path, filter));
-        out.println(utils.getSortableHeader("Owner", "owner", sort, order, path, filter));
-        out.println(utils.getSortableHeader("rwx", "permissions", sort, order, path, filter));
-        out.println(utils.getSortableHeader("Created", "created", sort, order, path, filter));
-        out.println(utils.getSortableHeader("Last Modified", "date", sort, order, path, filter));
-        out.println(utils.getSortableHeader("Size", "size", sort, order, path, filter));
+        out.println(ut.getSortableHeader("Name", "name", sort, order, path, filter));
+        out.println(ut.getSortableHeader("Owner", "owner", sort, order, path, filter));
+        out.println(ut.getSortableHeader("rwx", "permissions", sort, order, path, filter));
+        out.println(ut.getSortableHeader("Created", "created", sort, order, path, filter));
+        out.println(ut.getSortableHeader("Last Modified", "date", sort, order, path, filter));
+        out.println(ut.getSortableHeader("Size", "size", sort, order, path, filter));
         out.println("<th></th>");
         out.println("</tr>");
     }

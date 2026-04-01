@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
 import java.util.Comparator;
 
-public class utils {
+public class ut {
 
     public static String getOwner(File file) {
         try {
@@ -53,10 +53,10 @@ public class utils {
 
         switch (sort) {
             case "owner":
-                comparator = Comparator.comparing(utils::getOwner, String.CASE_INSENSITIVE_ORDER);
+                comparator = Comparator.comparing(ut::getOwner, String.CASE_INSENSITIVE_ORDER);
                 break;
             case "permissions":
-                comparator = Comparator.comparing(utils::getPermissions);
+                comparator = Comparator.comparing(ut::getPermissions);
                 break;
             case "created":
                 comparator = Comparator.comparingLong(file -> {

